@@ -1,2 +1,0 @@
-# mid-term-jam
-Oppsidoopsi
