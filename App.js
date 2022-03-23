@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import MovieList from './MovieList';
-import MovieListHeading from './MovieListHeading';
-import SearchBox from './SearchBox';
+import MovieListHeading from './MovieListHeaders';
+import SearchBox from './searchbox';
 
 const App = () => {
 	const [movies, setMovies] = useState([]);
