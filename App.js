@@ -1,27 +1,40 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
-import { useEffect, useState } from 'react/cjs/react.production.min';
-import react {useState, useEffect} from 'react';
-import './app.css';
+import React, { useState, useEffect } from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './App.css';
 import MovieList from './MovieList';
-import MovieListHeaders from '/MovieListHeaders';
-import SearchBar from '/searchbox';
+import MovieListHeading from './MovieListHeading';
+import SearchBox from './SearchBox';
 
+const App = () => {
+	const [movies, setMovies] = useState([]);
+	const [searchValue, setSearchValue] = useState('');
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
-}
+	const getMovieRequest = async (searchValue) => {
+		const url = `http://www.omdbapi.com/?s=${searchValue}&apikey=616d1666`;
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+		const response = await fetch(url);
+		const responseJson = await response.json();
+
+		if (responseJson.Search) {
+			setMovies(responseJson.Search);
+		}
+	};
+
+	useEffect(() => {
+		getMovieRequest(searchValue);
+	}, [searchValue]);
+
+	return (
+		<div className='container-fluid movie-app'>
+			<div className='row d-flex align-items-center mt-4 mb-4'>
+				<MovieListHeading heading='Movies' />
+				<SearchBox searchValue={searchValue} setSearchValue={setSearchValue} />
+			</div>
+			<div className='row'>
+				<MovieList movies={movies} />
+			</div>
+		</div>
+	);
+};
+
+export default App;
