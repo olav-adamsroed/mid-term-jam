@@ -1,5 +1,12 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
+import { useEffect, useState } from 'react/cjs/react.production.min';
+import react {useState, useEffect} from 'react';
+import './app.css';
+import MovieList from './MovieList';
+import MovieListHeaders from '/MovieListHeaders';
+import SearchBar from '/searchbox';
+
 
 export default function App() {
   return (
